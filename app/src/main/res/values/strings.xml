@@ -16,4 +16,5 @@
     <string name="dot">.</string>
     <string name="div">/</string>
     <string name="result">=</string>
+    <string name="clear">C</string>
 </resources>
