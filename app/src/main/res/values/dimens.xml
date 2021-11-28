@@ -5,4 +5,6 @@
     <dimen name="display_margin_top">20dp</dimen>
     <dimen name="btn_margin_top">10dp</dimen>
     <dimen name="clear_btn_text_size">24sp</dimen>
+    <dimen name="btn_padding">20dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
 </resources>
