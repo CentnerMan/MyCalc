@@ -1,10 +1,6 @@
 package ru.vlsv.mycalc.ui;
 
-import android.app.Activity;
-import android.app.Application;
 import android.util.Log;
-
-import androidx.core.content.ContextCompat;
 
 import ru.vlsv.mycalc.domain.Calculator;
 import ru.vlsv.mycalc.domain.Operation;

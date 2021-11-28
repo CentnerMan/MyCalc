@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="display_text">24sp</dimen>
+    <dimen name="display_padding">20dp</dimen>
+    <dimen name="display_margin_top">20dp</dimen>
+    <dimen name="btn_margin_top">10dp</dimen>
+    <dimen name="clear_btn_text_size">24sp</dimen>
+</resources>
