@@ -7,10 +7,6 @@ import ru.vlsv.mycalc.domain.Operation;
 
 public class CalculatorPresenter {
 
-    private void logCalculate(String toLog) {
-        Log.d("logCalculate", toLog);
-    }
-
     private final CalculatorView view;
     private final Calculator calculator;
 
@@ -23,6 +19,10 @@ public class CalculatorPresenter {
     public CalculatorPresenter(CalculatorView view, Calculator calculator) {
         this.view = view;
         this.calculator = calculator;
+    }
+
+    private void logCalculate(String toLog) {
+        Log.d("logCalculate", toLog);
     }
 
     public void onDigitPressed(char digit) {
@@ -49,7 +49,7 @@ public class CalculatorPresenter {
         }
     }
 
-    public void onOperandPressed(Operation operation) {
+    public void onOperandPressed(Operation operation, String errResult) {
 
         logCalculate("------Press button-------");
         logCalculate("operator: " + operation.toString());
@@ -75,7 +75,7 @@ public class CalculatorPresenter {
 
             if (argTwo == 0 && previousOperation == Operation.DIV) {
                 onCleanPresser();
-                view.showResult("Результат не опеределен");
+                view.showResult(errResult);
             } else {
                 double result = calculator.performOperation(argOne, argTwo, previousOperation);
                 strArgOne = String.valueOf(result);

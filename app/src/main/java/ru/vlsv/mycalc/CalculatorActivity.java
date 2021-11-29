@@ -19,6 +19,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     private CalculatorPresenter presenter;
 
+    private String errResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         presenter = new CalculatorPresenter(this, new CalculatorImpl());
 
         txtResult = findViewById(R.id.inOutField);
+        errResult = getResources().getString(R.string.result_string);
 
         HashMap<Integer, Character> digits = new HashMap<>();
         digits.put(R.id.number_0, '0');
@@ -71,7 +74,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         View.OnClickListener operandClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onOperandPressed(operands.get(v.getId()));
+                presenter.onOperandPressed(operands.get(v.getId()), errResult);
             }
         };
 
