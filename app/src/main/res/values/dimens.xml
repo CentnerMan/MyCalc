@@ -7,4 +7,5 @@
     <dimen name="clear_btn_text_size">24sp</dimen>
     <dimen name="btn_padding">20dp</dimen>
     <dimen name="corner_radius">10dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
 </resources>

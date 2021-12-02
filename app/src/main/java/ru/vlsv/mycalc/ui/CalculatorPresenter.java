@@ -98,4 +98,6 @@ public class CalculatorPresenter {
         isResult = false;
         view.showResult("");
     }
+
+
 }
