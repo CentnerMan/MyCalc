@@ -1,15 +1,24 @@
 package ru.vlsv.mycalc;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
 import ru.vlsv.mycalc.domain.CalculatorImpl;
 import ru.vlsv.mycalc.domain.Operation;
+import ru.vlsv.mycalc.domain.Theme;
+import ru.vlsv.mycalc.storage.ThemeStorage;
+import ru.vlsv.mycalc.themes.SelectThemesActivity;
 import ru.vlsv.mycalc.ui.CalculatorPresenter;
 import ru.vlsv.mycalc.ui.CalculatorView;
 
@@ -19,11 +28,34 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     private CalculatorPresenter presenter;
 
+    private ThemeStorage storage;
+
     private String errResult;
+
+    private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Theme theme = (Theme) result.getData().getSerializableExtra(SelectThemesActivity.EXTRA_THEME);
+
+                        storage.saveTheme(theme);
+
+                        recreate();
+//                        Toast.makeText(CalculatorActivity.this, theme.getName(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        storage = new ThemeStorage(this);
+
+        setTheme(storage.getSavedTheme().getTheme());
+
         setContentView(R.layout.activity_calculator);
 
         presenter = new CalculatorPresenter(this, new CalculatorImpl());
@@ -88,6 +120,15 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
             @Override
             public void onClick(View v) {
                 presenter.onCleanPresser();
+            }
+        });
+
+        findViewById(R.id.themes_select).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalculatorActivity.this, SelectThemesActivity.class);
+                intent.putExtra(SelectThemesActivity.EXTRA_THEME, storage.getSavedTheme());
+                launcher.launch(intent);
             }
         });
 

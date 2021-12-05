@@ -19,4 +19,6 @@
     <string name="result">=</string>
     <string name="clear">C</string>
     <string name="result_string">Undefined result</string>
+    <string name="theme_select_btn_text">Theme select</string>
+    <string name="theme_one">Основная тема</string>
 </resources>
